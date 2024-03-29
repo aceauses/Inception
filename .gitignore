@@ -1,2 +1,4 @@
 .env
-volumes
+volumes/mariadb/*
+volumes/wordpress/*
+volumes/nginx/*
