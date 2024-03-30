@@ -1,17 +1,33 @@
 FROM debian:bullseye
 
-# Install the required packages for the wordpress server
+RUN apt-get update && apt-get install -y php-fpm
+
+# Install required packages
 RUN apt-get update -y && apt-get install -y \
     curl \
     wget \
     php \
     php-fpm \
     php-mysql \
+    php-cli \
     php-cgi \
     php-pdo \
-    php-mbstring
+    php-mbstring && apt-get clean
 
-# Download and install the latest version of wordpress
+# Download and install WordPress
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
+
+RUN mkdir -p /run/php
+
+# Set the working directory for WordPress
+WORKDIR /var/www/html 
+
+# Expose the port used by php-fpm (usually 9000)
+EXPOSE 9000
+
+RUN ["chmod", "+x", "/usr/bin/php"]
+
+# Specify the default command to start php-fpm
+CMD ["php-fpm7.4", "-F"]

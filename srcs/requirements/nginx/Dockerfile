@@ -1,3 +1,3 @@
 FROM debian:bullseye
 
-RUN apt update
+RUN apt update -y && apt-get clean

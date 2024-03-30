@@ -8,8 +8,6 @@ services:
     container_name: mariadb
     networks:
       - inception
-    ports:
-      - "3306"
     volumes:
       - ../volumes/mariadb:/var/lib/mysql
     env_file:
@@ -22,8 +20,6 @@ services:
       - mariadb
     networks:
       - inception
-    ports:
-      - "9000"
     volumes:
       - ../volumes/wordpress:/var/www/html
     # restart: unless-stopped
