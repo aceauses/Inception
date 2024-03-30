@@ -1,6 +1,7 @@
 version: "3"
 networks:
   inception:
+    name: inception
 services:
   mariadb:
     build: requirements/mariadb/.
@@ -11,7 +12,9 @@ services:
       - "3306"
     volumes:
       - ../volumes/mariadb:/var/lib/mysql
-    restart: unless-stopped
+    env_file:
+      - .env
+    # restart: unless-stopped
   wordpress:
     build: requirements/wordpress/.
     container_name: wordpress
@@ -23,7 +26,7 @@ services:
       - "9000"
     volumes:
       - ../volumes/wordpress:/var/www/html
-    restart: unless-stopped
+    # restart: unless-stopped
   nginx:
     build: requirements/nginx/.
     container_name: nginx
@@ -35,4 +38,4 @@ services:
       - "443:443"
     volumes:
       - ../volumes/nginx:/var/www/html
-    restart: unless-stopped
+    # restart: unless-stopped

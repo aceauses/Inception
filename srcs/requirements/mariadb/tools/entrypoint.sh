@@ -1,8 +1,16 @@
 #!/bin/bash
+mysql_install_db
+mysql start
 
-# # Modify MariaDB configuration (assuming config file at /etc/my.cnf)
-# ls /etc/mysql/mariadb.conf.d/
-# sed -i 's/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
+mkdir /run/mysqld
+chown -R mysql:mysql /run/mysqld
 
-# Start the MariaDB server
-exec mysqld --skip-innodb --user=mysql --console
+echo "CREATE DATABASE IF NOT EXISTS $db_name;" > database.sql
+echo "CREATE USER IF NOT EXISTS '$db_user'@'%' IDENTIFIED BY '$db_password';" >> database.sql
+echo "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user'@'%';" >> database.sql
+echo "FLUSH PRIVILEGES;" >> database.sql
+
+mysql -u root < database.sql
+
+killall mysqld
+mysqld

@@ -25,5 +25,8 @@ clean_networks:
 	@docker network rm $(shell docker network ls -q) 2>/dev/null 1>/dev/null || true
 	@printf "\033[0;32mAll networks have been removed.\033[0m\n"
 
-clean: clean_images
+clean_directories:
+	@rm -rf ../volumes
+
+clean: clean_images clean_directories
 	@docker compose down
