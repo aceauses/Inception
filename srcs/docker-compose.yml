@@ -18,6 +18,8 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
+    env_file:
+      - .env
     networks:
       - inception
     volumes:
