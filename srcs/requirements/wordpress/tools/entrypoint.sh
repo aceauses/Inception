@@ -14,6 +14,7 @@ until mysql --host="$db_host" --port=3306 --user="$db_user" --password="$db_pass
   sleep 3
 done
 
+cd /var/www/html
 # Initialize WordPress if not already done
 if [ ! -f /var/www/html/wp-config.php ]; then
   echo "WordPress not installed. Installing..."
@@ -29,6 +30,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
       --dbhost="$db_host" \
       --allow-root
 
+  wp db create --allow-root
   # 3. Install WordPress with admin username check
   desired_admin_username="aceausesroot"
 
@@ -38,7 +40,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
   done
 
   wp core install \
-      --url='aceauses.42.fr' \
+      --url='localhost' \
       --title='TEST' \
       --admin_user="$desired_admin_username" \
       --admin_password='test' \
