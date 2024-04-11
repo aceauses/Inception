@@ -1,1 +1,3 @@
-echo HEY
+#!/bin/bash
+
+nginx -g 'daemon off;'

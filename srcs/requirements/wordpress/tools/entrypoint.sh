@@ -7,7 +7,7 @@ db_host="mariadb"
 db_name="${MYSQL_DATABASE}"
 db_user="${MYSQL_USER}"
 db_password="${MYSQL_PASSWORD}"
-
+sleep 10
 # Wait for the database to be ready
 until mysql --host="$db_host" --port=3306 --user="$db_user" --password="$db_password" -e "USE $db_name" &> /dev/null; do
   echo "Waiting for database to start..."
@@ -40,7 +40,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
   done
 
   wp core install \
-      --url='localhost' \
+      --url='aceauses.42.fr' \
       --title='TEST' \
       --admin_user="$desired_admin_username" \
       --admin_password='test' \
