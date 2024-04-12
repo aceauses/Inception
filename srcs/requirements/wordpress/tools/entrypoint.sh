@@ -40,7 +40,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
   done
 
   wp core install \
-      --url='aceauses.42.fr' \
+      --url='localhost' \
       --title='TEST' \
       --admin_user="$desired_admin_username" \
       --admin_password='test' \
