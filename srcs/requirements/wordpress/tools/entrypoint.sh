@@ -50,6 +50,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
   # 4. Install and activate Twenty Twenty-One theme
   wp theme install twentytwentythree --activate --allow-root
 fi
+sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
 
 echo "WordPress initialization complete."
 exec php-fpm7.4 -F 
