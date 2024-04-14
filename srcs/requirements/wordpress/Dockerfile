@@ -2,7 +2,6 @@ FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y php-fpm
 
-# Install required packages
 RUN apt-get update -y && apt-get install -y \
     mariadb-client \
     curl \
@@ -22,10 +21,7 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 RUN mkdir -p /run/php
 
-# Set the working directory for WordPress
 WORKDIR /var/www/html
-
-# Expose the port used by php-fpm (usually 9000)
 EXPOSE 9000
 
 RUN ["chmod", "+x", "/usr/bin/php"]

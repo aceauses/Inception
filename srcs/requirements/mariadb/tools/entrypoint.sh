@@ -8,15 +8,8 @@ fi
 mkdir /run/mysqld
 chown -R mysql:mysql /run/mysqld
 
-# Start MySQL in the background initially 
+# Start MySQL in the background initially
 mysqld &
-sleep 5  # Wait for MySQL server to initialize
-
-echo "ALL VARIABLES:"
-echo "MYSQL_DATABASE: $MYSQL_DATABASE"
-echo "MYSQL_USER: $MYSQL_USER"
-echo "MYSQL_PASSWORD: $MYSQL_PASSWORD"
-echo "MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD"
 
 # Create database and user if they don't exist
 if ! mysql -u root --password="$MYSQL_PASSWORD" -e "USE $MYSQL_DATABASE" >/dev/null 2>&1; then
@@ -29,7 +22,7 @@ if ! mysql -u root --password="$MYSQL_PASSWORD" -e "USE $MYSQL_DATABASE" >/dev/n
 fi
 
 # Stop the background initialization process
-killall mysqld 
+killall mysqld
 
-# Start MySQL in the foreground for normal operation 
+# Start MySQL in the foreground
 mysqld

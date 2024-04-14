@@ -32,6 +32,8 @@ services:
       - wordpress
     networks:
       - inception
+    env_file:
+      - .env
     ports:
       - "80:80"
     volumes:
