@@ -2,7 +2,6 @@ FROM debian:bullseye
 
 RUN apt-get update -y && apt-get install -y nginx && apt-get clean
 
-# COPY ./conf/default.conf /etc/nginx/sites-enabled/default
 COPY ./conf/default.conf /etc/nginx/sites-available/default
 
 EXPOSE 80
