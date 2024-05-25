@@ -25,13 +25,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 		--dbhost="$db_host" \
 		--allow-root
 
-	desired_admin_username="$WP_ADMIN_USER"
-
-	while [[ $desired_admin_username =~ (admin|Admin|administrator|Administrator) ]]; do
-		echo "Invalid admin username. Cannot contain 'admin', 'Admin', 'administrator', or 'Administrator'."
-		exit 1
-	done
-
 	wp core install \
 		--url="$DOMAIN_NAME" \
 		--title='Inception' \
