@@ -33,9 +33,9 @@ services:
     networks:
       - inception
     env_file:
-      - .env
+          - .env
     ports:
-      - "80:80"
+      - "443:443"
     volumes:
       - ../volumes/wordpress:/var/www/html
     # restart: unless-stopped
