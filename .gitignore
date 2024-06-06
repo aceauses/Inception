@@ -1,4 +1,5 @@
 .env
+.DS_STORE
 volumes/mariadb/*
 volumes/wordpress/*
 volumes/nginx/*
