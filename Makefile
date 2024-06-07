@@ -1,15 +1,13 @@
 start:
-	@docker compose up -d
-
-force:
-	@docker compose up -d --force-recreate
+	mkdir -p /home/aceauses/data /home/aceauses/data/mariadb /home/aceauses/wordpress
+	@docker compose -f ./srcs/docker-compose.yml up  -d
 
 stop:
-	@docker compose down
+	@docker compose -f ./srcs/docker-compose.yml down
 
 restart:
-	@docker compose down
-	@docker compose up -d
+	@docker compose -f ./srcs/docker-compose.yml down
+	@docker compose -f ./srcs/docker-compose.yml up -d
 
 
 clean_images: clean_containers clean_volumes clean_networks
@@ -34,4 +32,4 @@ clean_directories:
 	@rm -rf ../volumes
 
 clean: clean_images clean_directories
-	@docker compose down
+	@docker compose -f ./srcs/docker-compose.yml down

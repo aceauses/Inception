@@ -1,7 +1,20 @@
-version: "3"
+version: "3.9"
 networks:
   inception:
     name: inception
+volumes:
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/aceauses/data/mariadb
+      o: bind
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/aceauses/data/wordpress
+      o: bind
 services:
   mariadb:
     build: requirements/mariadb/.
@@ -9,7 +22,7 @@ services:
     networks:
       - inception
     volumes:
-      - ../volumes/mariadb:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     env_file:
       - .env
     restart: unless-stopped
@@ -23,7 +36,7 @@ services:
     networks:
       - inception
     volumes:
-      - ../volumes/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     restart: unless-stopped
   nginx:
     build: requirements/nginx/.
@@ -33,9 +46,9 @@ services:
     networks:
       - inception
     env_file:
-          - .env
+      - .env
     ports:
       - "443:443"
     volumes:
-      - ../volumes/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     restart: unless-stopped

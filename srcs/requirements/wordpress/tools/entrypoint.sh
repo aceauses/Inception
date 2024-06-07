@@ -1,16 +1,4 @@
 #!/bin/bash
-
-# Name of the database host container
-db_host="mariadb"
-
-db_name="${MYSQL_DATABASE}"
-db_user="${MYSQL_USER}"
-db_password="${MYSQL_PASSWORD}"
-sleep 10
-until mysql --host="$db_host" --port=3306 --user="$db_user" --password="$db_password" -e "USE $db_name" &> /dev/null; do
-	echo "Waiting for database to start..."
-	sleep 3
-done
 cd /var/www/html
 
 if [ ! -f /var/www/html/wp-config.php ]; then
@@ -38,5 +26,4 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 fi
 
 sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/g' /etc/php/7.4/fpm/pool.d/www.conf
-echo "WordPress initialization complete."
 exec php-fpm7.4 -F

@@ -1,16 +1,11 @@
 #!/bin/bash
 
-# Initialize data directory if it's empty
 if [ ! -d /var/lib/mysql/mysql ]; then
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
 fi
 
 mkdir /run/mysqld
 chown -R mysql:mysql /run/mysqld
-
-# Start MySQL in the background initially
-mysqld &
-sleep 5
 
 # Create database and user if they don't exist
 if ! mysql -u root --password="$MYSQL_ROOT_PASSWORD" -e "USE $MYSQL_DATABASE" >/dev/null 2>&1; then
@@ -22,8 +17,6 @@ if ! mysql -u root --password="$MYSQL_ROOT_PASSWORD" -e "USE $MYSQL_DATABASE" >/
     mysql -u root --password="$MYSQL_ROOT_PASSWORD" < database.sql
 fi
 
-# Stop the background initialization process
 killall mysqld
 
-# Start MySQL in the foreground
 mysqld
