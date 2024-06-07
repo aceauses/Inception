@@ -17,6 +17,4 @@ if ! mysql -u root --password="$MYSQL_ROOT_PASSWORD" -e "USE $MYSQL_DATABASE" >/
     mysql -u root --password="$MYSQL_ROOT_PASSWORD" < database.sql
 fi
 
-killall mysqld
-
 mysqld

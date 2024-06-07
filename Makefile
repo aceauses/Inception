@@ -1,5 +1,5 @@
 start:
-	mkdir -p /home/aceauses/data /home/aceauses/data/mariadb /home/aceauses/wordpress
+	mkdir -p /home/aceauses/data /home/aceauses/data/mariadb /home/aceauses/data/wordpress
 	@docker compose -f ./srcs/docker-compose.yml up  -d
 
 stop:
