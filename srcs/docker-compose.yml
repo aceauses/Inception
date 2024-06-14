@@ -26,11 +26,17 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/health_check.sh"]
+      interval: 10s
+      timeout: 1m
+      retries: 5
   wordpress:
     build: requirements/wordpress/.
     container_name: wordpress
     depends_on:
-      - mariadb
+      mariadb:
+          condition: service_healthy
     env_file:
       - .env
     networks:

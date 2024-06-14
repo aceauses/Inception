@@ -1,5 +1,5 @@
 start:
-	mkdir -p /home/aceauses/data /home/aceauses/data/mariadb /home/aceauses/data/wordpress
+	mkdir -p /home/aceauses/data/mariadb /home/aceauses/data/mariadb /home/aceauses/data/wordpress
 	@docker compose -f ./srcs/docker-compose.yml up  -d
 
 stop:
@@ -28,8 +28,5 @@ clean_networks:
 	@docker network rm $(shell docker network ls -q) 2>/dev/null 1>/dev/null || true
 	@printf "\033[0;32mAll networks have been removed.\033[0m\n"
 
-clean_directories:
-	@rm -rf ../volumes
-
-clean: clean_images clean_directories
+clean: clean_images
 	@docker compose -f ./srcs/docker-compose.yml down
