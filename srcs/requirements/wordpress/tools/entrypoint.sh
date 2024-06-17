@@ -1,6 +1,11 @@
 #!/bin/bash
 cd /var/www/html
 
+source /run/secrets/credentials.txt
+
+MYSQL_USER=$WP_DB_USER
+MYSQL_PASSWORD=$WP_DB_PASSWORD
+
 if [ ! -f /var/www/html/wp-config.php ]; then
 	echo "WordPress not installed. Installing..."
 

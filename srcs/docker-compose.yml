@@ -25,6 +25,9 @@ services:
       - mariadb_data:/var/lib/mysql
     env_file:
       - .env
+    secrets:
+      - db_root_password
+      - db_password
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "/usr/local/bin/health_check.sh"]
@@ -39,6 +42,8 @@ services:
           condition: service_healthy
     env_file:
       - .env
+    secrets:
+      - credentials
     networks:
       - inception
     volumes:
@@ -53,8 +58,22 @@ services:
       - inception
     env_file:
       - .env
+    secrets:
+      - cert_crt
+      - cert_key
     ports:
       - "443:443"
     volumes:
       - wordpress_data:/var/www/html
     restart: unless-stopped
+secrets:
+  db_root_password:
+    file: ./secrets/db_root_password.txt
+  db_password:
+    file: ./secrets/db_password.txt
+  cert_crt:
+    file: ./secrets/nginx.crt
+  cert_key:
+    file: ./secrets/nginx.key
+  credentials:
+    file: ./secrets/credentials.txt

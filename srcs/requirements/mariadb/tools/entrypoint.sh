@@ -6,6 +6,8 @@ fi
 
 mkdir /run/mysqld
 chown -R mysql:mysql /run/mysqld
+MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
+MYSQL_PASSWORD=$(cat /run/secrets/db_password)
 
 if [ ! -f /database.sql ]; then
 	echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" > database.sql
