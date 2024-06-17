@@ -68,12 +68,12 @@ services:
     restart: unless-stopped
 secrets:
   db_root_password:
-    file: ./secrets/db_root_password.txt
+    file: ../secrets/db_root_password.txt
   db_password:
-    file: ./secrets/db_password.txt
+    file: ../secrets/db_password.txt
   cert_crt:
-    file: ./secrets/nginx.crt
+    file: ../secrets/nginx.crt
   cert_key:
-    file: ./secrets/nginx.key
+    file: ../secrets/nginx.key
   credentials:
-    file: ./secrets/credentials.txt
+    file: ../secrets/credentials.txt
