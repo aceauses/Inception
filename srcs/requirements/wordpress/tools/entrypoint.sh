@@ -1,7 +1,7 @@
 #!/bin/bash
 cd /var/www/html
 
-source /run/secrets/credentials.txt
+source /run/secrets/credentials
 
 MYSQL_USER=$WP_DB_USER
 MYSQL_PASSWORD=$WP_DB_PASSWORD
